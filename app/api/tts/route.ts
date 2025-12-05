@@ -21,7 +21,10 @@ export async function GET(request: NextRequest) {
         const voice = VOICES[lang] || VOICES['ja'];
         const audioBuffer = await tts(text, { voice });
 
-        return new NextResponse(audioBuffer, {
+        // Buffer를 Uint8Array로 변환
+        const uint8Array = new Uint8Array(audioBuffer);
+
+        return new NextResponse(uint8Array, {
             headers: {
                 'Content-Type': 'audio/mpeg',
                 'Cache-Control': 'public, max-age=86400',
@@ -29,9 +32,10 @@ export async function GET(request: NextRequest) {
             },
         });
 
-    } catch (error: any) {
+    } catch (error: unknown) {
         console.error('TTS Error:', error);
-        return NextResponse.json({ error: error.message }, { status: 500 });
+        const message = error instanceof Error ? error.message : 'Unknown error';
+        return NextResponse.json({ error: message }, { status: 500 });
     }
 }
 
