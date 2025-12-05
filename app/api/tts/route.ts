@@ -19,7 +19,7 @@ export async function GET(request: NextRequest) {
 
     try {
         const voice = VOICES[lang] || VOICES['ja'];
-        const audioBuffer = await tts(text, voice);
+        const audioBuffer = await tts(text, { voice });
 
         return new NextResponse(audioBuffer, {
             headers: {
