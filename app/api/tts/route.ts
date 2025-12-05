@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { tts } from 'edge-tts';
 
+export const runtime = 'edge';
+
 const VOICES: { [key: string]: string } = {
     'ja': 'ja-JP-NanamiNeural',
     'ko': 'ko-KR-SunHiNeural',
