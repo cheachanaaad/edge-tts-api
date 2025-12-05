@@ -24,7 +24,7 @@ export async function GET(request: NextRequest) {
         const voice = VOICES[lang] || VOICES['ja']
         const audioBuffer = await tts(text, { voice })
 
-        return new Response(audioBuffer, {
+        return new Response(new Uint8Array(audioBuffer), {
             headers: {
                 'Content-Type': 'audio/mpeg',
                 'Cache-Control': 'public, max-age=86400',
