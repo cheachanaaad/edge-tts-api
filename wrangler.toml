@@ -1,0 +1,7 @@
+name = "edge-tts-api"
+compatibility_date = "2024-12-01"
+compatibility_flags = ["nodejs_compat"]
+assets = { directory = ".next/static", binding = "ASSETS" }
+
+[build]
+command = "npm run build"
